@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b3822442-f642-4e0d-87ae-b1e0ddd98b8a">
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     t_commands.`id` AS t_commands_id,
+     t_commands.`idfood` AS t_commands_idfood,
+     t_commands.`qte` AS t_commands_qte,
+     t_commands.`amount` AS t_commands_amount,
+     t_commands.`datecommand` AS t_commands_datecommand,
+     t_commands.`idInvoice` AS t_commands_idInvoice,
+     t_commands.`iduser` AS t_commands_iduser
+FROM
+     `t_commands` t_commands]]>
+	</queryString>
+	<field name="t_commands_id" class="java.lang.Long"/>
+	<field name="t_commands_idfood" class="java.lang.Integer"/>
+	<field name="t_commands_qte" class="java.lang.Integer"/>
+	<field name="t_commands_amount" class="java.lang.Double"/>
+	<field name="t_commands_datecommand" class="java.sql.Date"/>
+	<field name="t_commands_idInvoice" class="java.lang.Integer"/>
+	<field name="t_commands_iduser" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="1cce181f-89e6-4d40-bc19-7854ba72ea76"/>
+				<imageExpression><![CDATA["leaf_banner_violet.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="51c61ff4-4ba5-4596-b042-604a5bccd2b7"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Violet Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="46" width="200" height="22" uuid="337c25d7-a520-4a77-86d2-bcc1a075427a"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Leaf Violet SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="27b1dbca-dc6f-4d3e-9b75-ec7e4a7c76e6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="79" height="15" uuid="5bd8846b-981e-49e6-a9ff-053624801893"/>
+				<text><![CDATA[t_commands_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="79" y="19" width="79" height="15" uuid="0f7187c3-5d2e-4b95-9fa6-15588b0a032e"/>
+				<text><![CDATA[t_commands_idfood]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="158" y="19" width="79" height="15" uuid="58271c21-7018-4db5-87bf-137c541dec89"/>
+				<text><![CDATA[t_commands_qte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="237" y="19" width="79" height="15" uuid="b35c4c4e-3d7e-442d-8a02-302b6fb0cedb"/>
+				<text><![CDATA[t_commands_amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="316" y="19" width="79" height="15" uuid="d555cdba-650b-4312-8858-a790e1cde091"/>
+				<text><![CDATA[t_commands_datecommand]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="395" y="19" width="79" height="15" uuid="c0f5915c-2490-4992-a16e-d051c24a7425"/>
+				<text><![CDATA[t_commands_idInvoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="474" y="19" width="79" height="15" uuid="a6c950a3-3dd9-41e5-a0de-d881f1e581b6"/>
+				<text><![CDATA[t_commands_iduser]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="eaf7af1f-62d4-4f67-ab04-adbcc35c89ad"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="79" height="15" uuid="42dcfef9-8a38-49a9-91c8-f9c41df39c43"/>
+				<textFieldExpression><![CDATA[$F{t_commands_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="79" y="0" width="79" height="15" uuid="490e1145-cdec-4d34-965a-3fafc9538087"/>
+				<textFieldExpression><![CDATA[$F{t_commands_idfood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="158" y="0" width="79" height="15" uuid="0407328b-05ac-4f5a-a844-cada4522f823"/>
+				<textFieldExpression><![CDATA[$F{t_commands_qte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="237" y="0" width="79" height="15" uuid="1e0525b5-a10c-4a2e-a2e2-2fd22b429bda"/>
+				<textFieldExpression><![CDATA[$F{t_commands_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="316" y="0" width="79" height="15" uuid="e4bdd64c-3b0d-480a-a6cd-073461b829b3"/>
+				<textFieldExpression><![CDATA[$F{t_commands_datecommand}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="395" y="0" width="79" height="15" uuid="0c16e854-8a6b-4e52-973a-d8a9046d4956"/>
+				<textFieldExpression><![CDATA[$F{t_commands_idInvoice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="474" y="0" width="79" height="15" uuid="9810146d-8e33-45b0-8b82-d74902102d41"/>
+				<textFieldExpression><![CDATA[$F{t_commands_iduser}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="0e63de6a-bf8c-4a7a-9780-47df73f019cf"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="d849ae85-46bf-4c5e-b0f5-517e6bdd3445"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="75cedcdf-1461-4edd-a0bd-35357d32db94"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="a3a0aaec-0d3c-4dd2-9282-65a91a413122"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

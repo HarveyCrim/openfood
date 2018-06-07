@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="260" pageHeight="842" columnWidth="250" leftMargin="5" rightMargin="5" topMargin="20" bottomMargin="20" uuid="4a528e84-c599-45b8-9470-373a28e2dcd7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="date" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT foods.`namefood`, SUM(cmd.`qte`) AS qte, SUM(cmd.`amount`) AS amount, SUM(invoices.`totalPaie`) AS TotalFacture, rates.`FC` AS rate,users.`fullname` AS username,invoices.`id` AS tciket
+ FROM t_invoices invoices JOIN t_commands cmd ON invoices.`id`=cmd.`idInvoice`
+JOIN t_foods foods ON foods.`id`=cmd.`idfood` JOIN t_rates rates ON rates.`idRate`=invoices.`idRate` JOIN t_users users ON users.`id`=cmd.`iduser`
+WHERE invoices.`dateInvoice`=$P{date}
+GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
+	</queryString>
+	<field name="namefood" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qte" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalFacture" class="java.lang.Double"/>
+	<field name="rate" class="java.lang.Double"/>
+	<field name="username" class="java.lang.String"/>
+	<field name="ticket" class="java.lang.String"/>
+	<variable name="date" class="java.lang.String"/>
+	<group name="username">
+		<groupExpression><![CDATA[$F{username}]]></groupExpression>
+		<groupHeader>
+			<band height="52">
+				<staticText>
+					<reportElement style="Column header" x="0" y="34" width="17" height="15" forecolor="#000000" uuid="07cf4ab8-9397-41e3-937a-377dc1958d7e"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[qte]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="21" y="34" width="38" height="15" forecolor="#000000" uuid="9258d24a-712a-47b4-806f-48bc8d5adf42"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[produit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="128" y="34" width="41" height="15" forecolor="#000000" uuid="811fb937-8865-4ead-b8cc-f2761dd47824"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Montant]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="SubTitle" x="3" y="0" width="253" height="16" forecolor="#000000" uuid="d163cfda-63fe-4b35-9757-cc54a18148bc"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="3" y="19" width="92" height="15" uuid="80bfd722-b5d4-4aff-bb9a-2eabdf78eea6"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Taux du jour: "+$F{rate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<textField>
+					<reportElement style="Detail" x="107" y="2" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CDF "+$F{TotalFacture}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="2" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL GENERAL]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Detail" x="107" y="16" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["USD "+$F{TotalFacture}/$F{rate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="6" y="1" width="250" height="33" uuid="b4545d69-f41a-479b-8b0e-74358dbdeac5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Restaurant Jielsa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="3" y="34" width="247" height="14" forecolor="#000000" uuid="3226a033-f76a-4993-94fb-7291f569bccc"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chez Flore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="3" y="49" width="247" height="12" forecolor="#000000" uuid="b537bb25-4cf2-4cdb-900c-1b64e02ccb7a"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4093, Av. Progrès, Q/Bon marché, C/ Barumbu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="62" width="250" height="16" forecolor="#000000" uuid="8c1497cd-b565-4834-8433-a615da0d7052"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel : (+243)894023625]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="3" y="0" width="253" height="20" uuid="ddaee1e8-9ed0-4322-af67-938c16285ace"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="28989903-785f-441f-ad49-c9faec42de12"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="3" y="0" width="14" height="15" uuid="2da78db6-e484-42f6-bd34-c38040914434"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="122" y="1" width="74" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="19" y="1" width="97" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namefood}.toLowerCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

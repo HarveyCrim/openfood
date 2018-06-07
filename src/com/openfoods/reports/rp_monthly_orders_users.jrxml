@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a528e84-c599-45b8-9470-373a28e2dcd7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="userid" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT foods.`namefood`, SUM(cmd.`qte`) AS qte, SUM(cmd.`amount`) AS amount, SUM(invoices.`totalPaie`) AS TotalFacture, rates.`FC` AS rate,users.`fullname` AS username
+ FROM t_invoices invoices JOIN t_commands cmd ON invoices.`id`=cmd.`idInvoice`
+JOIN t_foods foods ON foods.`id`=cmd.`idfood` JOIN t_rates rates ON rates.`idRate`=invoices.`idRate` JOIN t_users users ON users.`id`=cmd.`iduser`
+WHERE invoices.`dateInvoice` LIKE '%$!P{month}%' AND users.`id`=$P{userid}
+GROUP BY foods.`namefood`, rates.`idRate`,users.`id`]]>
+	</queryString>
+	<field name="namefood" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qte" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalFacture" class="java.lang.Double"/>
+	<field name="rate" class="java.lang.Double"/>
+	<field name="username" class="java.lang.String"/>
+	<variable name="date" class="java.lang.String"/>
+	<group name="username">
+		<groupExpression><![CDATA[$F{username}]]></groupExpression>
+		<groupHeader>
+			<band height="57">
+				<staticText>
+					<reportElement style="Column header" x="0" y="34" width="111" height="15" forecolor="#000000" uuid="07cf4ab8-9397-41e3-937a-377dc1958d7e"/>
+					<text><![CDATA[Produit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="246" y="34" width="111" height="15" forecolor="#000000" uuid="9258d24a-712a-47b4-806f-48bc8d5adf42"/>
+					<text><![CDATA[Quantité]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="357" y="34" width="111" height="15" forecolor="#000000" uuid="811fb937-8865-4ead-b8cc-f2761dd47824"/>
+					<text><![CDATA[Montant Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="SubTitle" x="5" y="7" width="446" height="24" forecolor="#000000" uuid="d163cfda-63fe-4b35-9757-cc54a18148bc"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<image>
+				<reportElement x="435" y="0" width="72" height="80" uuid="2eb88128-90ef-49cf-aadd-1981856c4339"/>
+				<imageExpression><![CDATA["iconreport.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="391" y="68" width="157" height="22" forecolor="#000000" uuid="86bb252e-5f33-48e0-a369-2ed12e661a46"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[openfoods]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="2" y="1" width="263" height="33" uuid="b4545d69-f41a-479b-8b0e-74358dbdeac5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Restaurant Jielsa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="3" y="34" width="157" height="22" forecolor="#000000" uuid="3226a033-f76a-4993-94fb-7291f569bccc"/>
+				<text><![CDATA[Chez Flore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="3" y="58" width="379" height="12" forecolor="#000000" uuid="b537bb25-4cf2-4cdb-900c-1b64e02ccb7a"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4093, Av. Progrès, Q/Bon marché, C/ Barumbu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="3" y="71" width="379" height="16" forecolor="#000000" uuid="8c1497cd-b565-4834-8433-a615da0d7052"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(+243)8995245528]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="c43bff8a-040a-4d29-9d14-68f207467b54"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="9" width="505" height="20" uuid="8c078141-b0b0-4b9e-997e-35b5e993f40b"/>
+				<textFieldExpression><![CDATA["Rapport mensuel: "+LocalDate.now().getMonth().toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="28989903-785f-441f-ad49-c9faec42de12"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="248" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namefood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="248" y="0" width="97" height="15" uuid="2da78db6-e484-42f6-bd34-c38040914434"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="357" y="0" width="173" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="71" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="b543b0a6-d2f7-48f5-a51a-600de18787a3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="432" y="47" width="111" height="15" uuid="80bfd722-b5d4-4aff-bb9a-2eabdf78eea6"/>
+				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="427" y="10" width="111" height="15" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+				<textFieldExpression><![CDATA["CDF "+$F{TotalFacture}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="323" y="8" width="100" height="20" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GENERAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="431" y="28" width="111" height="15" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+				<textFieldExpression><![CDATA["USD "+$F{TotalFacture}/$F{rate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="45" width="100" height="20" uuid="04baea9c-2b25-4d8d-9980-22e9549f8285"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Taux]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="e3d5c3e4-9ecb-447c-b8ea-5168d9165874"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="1056c840-5d86-4ada-8286-3c3989eabfbb"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="ddaee1e8-9ed0-4322-af67-938c16285ace"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

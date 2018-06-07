@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="918e29a6-20e3-47da-80f8-5be5b69ebc72">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     t_foods.`id` AS t_foods_id,
+     t_foods.`namefood` AS t_foods_namefood,
+     t_foods.`price` AS t_foods_price,
+     t_foods.`typeFood` AS t_foods_typeFood,
+     t_foods.`status` AS t_foods_status,
+     t_type_food.`codeType` AS t_type_food_codeType,
+     t_type_food.`nameType` AS t_type_food_nameType
+FROM
+     `t_type_food` t_type_food INNER JOIN `t_foods` t_foods ON t_type_food.`codeType` = t_foods.`typeFood`]]>
+	</queryString>
+	<field name="t_foods_namefood" class="java.lang.String"/>
+	<field name="t_foods_price" class="java.lang.Double"/>
+	<field name="t_foods_typeFood" class="java.lang.String"/>
+	<group name="t_foods_typeFood">
+		<groupExpression><![CDATA[$F{t_foods_typeFood}]]></groupExpression>
+		<groupHeader>
+			<band height="52">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="0" width="506" height="24" forecolor="#000000" uuid="d9c708e6-3928-4c27-a2ae-ed29b4291ecf"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{t_foods_typeFood}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="278" y="28" width="210" height="15" forecolor="#000000" uuid="c22a6e26-b3c6-4ce0-b2e5-c51327590b3d"/>
+					<text><![CDATA[Prix ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="3" y="29" width="217" height="15" forecolor="#000000" uuid="32ad5ebc-ace0-4909-8bb7-ba19961722b2"/>
+					<text><![CDATA[Articles ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="6bd0dd77-487d-464d-8e1e-1e144310ac64"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Chez Flore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="157" height="22" uuid="0e98ac1c-8df8-42a2-a60a-720650ab2ab7"/>
+				<text><![CDATA[Restaurant VIP]]></text>
+			</staticText>
+			<image>
+				<reportElement x="445" y="3" width="72" height="80" uuid="75b83e60-7a32-4451-91dd-99bf3d160730"/>
+				<imageExpression><![CDATA["iconreport.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="401" y="72" width="157" height="22" forecolor="#000000" uuid="5c7979e9-b699-469b-a519-79c83258b7b3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[openfoods]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="dc62578d-4cc3-41ae-9a59-f69367d95fb3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="1a29a7ff-e2e5-4ad6-9312-62cf3da2a36e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="277" height="15" uuid="7da99512-9f1c-4f19-abd6-c1bfeb3ce11e"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_foods_namefood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="277" y="0" width="277" height="15" uuid="21f2a3ab-e09a-46fe-a721-aba48305b2cc"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_foods_price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="4f38f4a9-22e2-4167-acb5-af993201f303"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="61a4adc9-1b0c-497f-8f63-0572870c1761"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="9fde48e7-e807-4d27-b124-6bcafd7eaa51"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="f7233b57-e7f2-4f10-b950-231dd02752fa"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0130226d-6ecc-410f-b38f-052cc9e70840">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     t_foods.`id` AS t_foods_id,
+     t_foods.`namefood` AS t_foods_namefood,
+     t_foods.`price` AS t_foods_price,
+     t_foods.`typeFood` AS t_foods_typeFood,
+     t_foods.`status` AS t_foods_status,
+     t_type_food.`codeType` AS t_type_food_codeType,
+     t_type_food.`nameType` AS t_type_food_nameType
+FROM
+     `t_type_food` t_type_food INNER JOIN `t_foods` t_foods ON t_type_food.`codeType` = t_foods.`typeFood`]]>
+	</queryString>
+	<field name="t_foods_id" class="java.lang.Integer"/>
+	<field name="t_foods_namefood" class="java.lang.String"/>
+	<field name="t_foods_price" class="java.lang.Double"/>
+	<field name="t_foods_typeFood" class="java.lang.String"/>
+	<field name="t_foods_status" class="java.lang.Integer"/>
+	<field name="t_type_food_codeType" class="java.lang.String"/>
+	<field name="t_type_food_nameType" class="java.lang.String"/>
+	<group name="t_type_food_nameType">
+		<groupExpression><![CDATA[$F{t_type_food_nameType}]]></groupExpression>
+		<groupHeader>
+			<band height="57">
+				<textField>
+					<reportElement style="SubTitle" x="3" y="4" width="506" height="24" forecolor="#000000" uuid="1bcfacb7-57bd-43a3-886b-215cee77edb5"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{t_type_food_nameType}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="5" y="42" width="192" height="15" forecolor="#000000" uuid="8037330b-e2ce-4ec4-8537-c23fa7e4dd9e"/>
+					<text><![CDATA[Article]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="279" y="42" width="192" height="15" forecolor="#000000" uuid="9caed65b-1937-4dac-88ac-2eedd427ed03"/>
+					<text><![CDATA[Prix]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="116" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="5bf1f0f5-50e7-40f7-9140-46a5433c01cf"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Restaurant Jielsa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="5" y="46" width="157" height="22" forecolor="#000000" uuid="c2edb35f-925a-471b-b60d-b1f9f506b299"/>
+				<text><![CDATA[Chez Flore]]></text>
+			</staticText>
+			<image>
+				<reportElement x="451" y="0" width="72" height="80" uuid="1e94c01a-f190-4ffa-857f-a5bac059d564"/>
+				<imageExpression><![CDATA["iconreport.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="411" y="68" width="157" height="22" forecolor="#000000" uuid="c44082dd-10da-4656-ac2c-a2a732281938"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[openfoods]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="5" y="68" width="379" height="12" forecolor="#000000" uuid="2e9ac0fd-5a18-42fc-8654-4cc196d11f42"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4093, Av. Progrès, Q/Bon marché, C/ Barumbu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="6" y="80" width="379" height="16" forecolor="#000000" uuid="329c8db4-262c-41d4-b379-29d566e8867d"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(+243)8995245528]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="69f62a4a-c582-466a-bb3c-6741fcc6ffcd"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="0ddf2a0d-35c4-4da2-b59f-9bed226126a4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="5" y="0" width="246" height="15" uuid="e2086858-b40c-4167-b5a8-e2e5cdd2859f"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_foods_namefood}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="281" y="0" width="170" height="15" uuid="62074282-8723-4135-ad7c-0d9bae65ccdb"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDF "+$F{t_foods_price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="8876c32b-aeb6-43aa-99ec-05404ef96219"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="acd362e8-d934-463b-8759-26e188df3095"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="34d3046b-86b1-4000-929a-badb73347566"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="f29ccb09-c67b-485f-945f-28e2df27e93c"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -9,7 +9,7 @@ package com.openfoods.configs;
  *
  * @author hornellama
  */
-import java.awt.Font;
+import java.awt.Font;  
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;

@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/hornellama/Desktop/gitprojects/openfood/src/forms/Dashboard.java</file>
+            <file>file:/Users/hornellama/Desktop/gitprojects/openfood/src/com/openfoods/reports/rp_print_booking-order.jrxml</file>
+            <file>file:/Users/hornellama/Desktop/gitprojects/openfood/src/com/openfoods/configs/SQLDB.java</file>
+            <file>file:/Users/hornellama/Desktop/gitprojects/openfood/src/com/openfoods/controllers/billingController.java</file>
+            <file>file:/Users/hornellama/Desktop/gitprojects/openfood/src/com/openfoods/controllers/bookingController.java</file>
+            <file>file:/Users/hornellama/Desktop/gitprojects/openfood/src/com/openfoods/configs/ActionType.java</file>
+        </group>
     </open-files>
 </project-private>

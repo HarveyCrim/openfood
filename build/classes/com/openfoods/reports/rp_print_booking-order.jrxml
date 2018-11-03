@@ -10,7 +10,7 @@
 	<parameter name="idTicket" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT foods.`namefood`, SUM(cmd.`qte`) AS qte, SUM(cmd.`amount`) AS amount, SUM(invoices.`totalPaie`) AS TotalFacture, rates.`FC` AS rate,users.`fullname` AS username,
-invoices.`id` AS ticket
+invoices.`id` AS ticket,invoices.`totaltopaid` AS topaid
  FROM t_invoices_booking invoices JOIN t_commands_booking cmd ON invoices.`id`=cmd.`idInvoice`
 JOIN t_foods foods ON foods.`id`=cmd.`idfood` JOIN t_rates rates ON rates.`idRate`=invoices.`idRate` JOIN t_users users ON users.`id`=cmd.`iduser`
 WHERE invoices.`id`=$P{idTicket}
@@ -79,56 +79,70 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`, invoices.`id`]]>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="109">
+			<band height="149">
 				<textField>
-					<reportElement style="Detail" x="115" y="18" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+					<reportElement style="Detail" x="112" y="58" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA["CDF "+$F{TotalFacture}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="3" y="18" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
+					<reportElement x="3" y="58" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[TOTAL GENERAL]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="120" y="0" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<reportElement style="Detail" x="117" y="41" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<textFieldExpression><![CDATA["USD "+$F{TotalFacture}/$F{rate}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="2" y="40" width="248" height="14" uuid="9d31b012-f668-4621-b79c-f2d060fae6e2"/>
+					<reportElement x="2" y="72" width="248" height="14" uuid="9d31b012-f668-4621-b79c-f2d060fae6e2"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="95" width="248" height="14" uuid="cb9dc757-f697-425e-8caa-a3822dd9d725"/>
+					<reportElement x="0" y="117" width="248" height="14" uuid="cb9dc757-f697-425e-8caa-a3822dd9d725"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="54" width="248" height="14" uuid="9602f43c-a64a-4d05-8c49-b9ad1376a8f4"/>
+					<reportElement x="2" y="85" width="248" height="14" uuid="9602f43c-a64a-4d05-8c49-b9ad1376a8f4"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[                       Merci de votre visite ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="1" y="76" width="248" height="14" uuid="ca0a2440-378a-4e0b-9214-06eed541adb7"/>
+					<reportElement x="1" y="101" width="248" height="14" uuid="ca0a2440-378a-4e0b-9214-06eed541adb7"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[             Ouvert tous les jours de 12h a 23h]]></text>
 				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="12" uuid="b4814c3e-11df-48cf-8586-54099d41cabe"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AVANCE PERÇU]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Detail" x="103" y="0" width="111" height="14" uuid="ee8703e4-f34d-4b9b-87f8-c1dbb878242a"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["USD "+$F{TotalFacture}/$F{rate}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>

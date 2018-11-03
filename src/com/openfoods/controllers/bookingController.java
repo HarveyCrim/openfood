@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author hornellama
- */ 
+ */  
 public class bookingController {
     private SQLDB sqldb;
      private IResultQuery iResultQuery;

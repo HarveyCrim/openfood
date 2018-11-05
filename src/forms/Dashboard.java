@@ -23,6 +23,7 @@ import com.openfoods.controllers.loginController;
 import com.openfoods.controllers.orderController;
 import com.openfoods.controllers.productController;
 import com.openfoods.controllers.rateController;
+import com.openfoods.controllers.trashController;
 import com.openfoods.controllers.userController;
 import com.openfoods.models.billing;
 import com.openfoods.models.food;
@@ -632,6 +633,17 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        jPanel29 = new javax.swing.JPanel();
+        btn_cancel_order = new javax.swing.JButton();
+        btn_cancel_booking = new javax.swing.JButton();
+        tx_search_cancel_invoice = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        btn_cancel_booking_order = new javax.swing.JButton();
+        jPanel30 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tble_cancel_booking = new javax.swing.JTable();
+        lbl_total_cancel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1961,6 +1973,140 @@ public class Dashboard extends javax.swing.JFrame {
     );
 
     parent_tabbed.addTab("A propos", jPanel19);
+
+    jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions "));
+
+    btn_cancel_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shopping-cart-48.png"))); // NOI18N
+    btn_cancel_order.setText("                              COMMANDE");
+    btn_cancel_order.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_cancel_orderActionPerformed(evt);
+        }
+    });
+
+    btn_cancel_booking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shopping-basket-48.png"))); // NOI18N
+    btn_cancel_booking.setText("                        RESERVATION");
+    btn_cancel_booking.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_cancel_bookingActionPerformed(evt);
+        }
+    });
+
+    jLabel25.setText("Entrez le code de la facture");
+
+    btn_cancel_booking_order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-cancel-45.png"))); // NOI18N
+    btn_cancel_booking_order.setText("             ANNULER LA FACTURE");
+    btn_cancel_booking_order.setEnabled(false);
+    btn_cancel_booking_order.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_cancel_booking_orderActionPerformed(evt);
+        }
+    });
+
+    javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+    jPanel29.setLayout(jPanel29Layout);
+    jPanel29Layout.setHorizontalGroup(
+        jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel29Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tx_search_cancel_invoice, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(btn_cancel_booking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_cancel_order, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel29Layout.createSequentialGroup()
+                    .addComponent(jLabel25)
+                    .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(btn_cancel_booking_order, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+            .addContainerGap())
+    );
+    jPanel29Layout.setVerticalGroup(
+        jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
+            .addGap(18, 18, 18)
+            .addComponent(jLabel25)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(tx_search_cancel_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(btn_cancel_order)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(btn_cancel_booking, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(btn_cancel_booking_order)
+            .addContainerGap(60, Short.MAX_VALUE))
+    );
+
+    jPanel30.setBorder(javax.swing.BorderFactory.createTitledBorder("Tableau des données"));
+
+    tble_cancel_booking.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null, null},
+            {null, null, null, null, null},
+            {null, null, null, null, null},
+            {null, null, null, null, null}
+        },
+        new String [] {
+            "Date command", "id product", "Product Name", "Quantity", "price"
+        }
+    ) {
+        boolean[] canEdit = new boolean [] {
+            false, true, false, false, true
+        };
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    jScrollPane6.setViewportView(tble_cancel_booking);
+    if (tble_cancel_booking.getColumnModel().getColumnCount() > 0) {
+        tble_cancel_booking.getColumnModel().getColumn(0).setResizable(false);
+    }
+
+    lbl_total_cancel.setText("lbl_total");
+
+    javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+    jPanel30.setLayout(jPanel30Layout);
+    jPanel30Layout.setHorizontalGroup(
+        jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        .addGroup(jPanel30Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel30Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lbl_total_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE))
+            .addContainerGap())
+    );
+    jPanel30Layout.setVerticalGroup(
+        jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel30Layout.createSequentialGroup()
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(lbl_total_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(19, 19, 19))
+    );
+
+    javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+    jPanel28.setLayout(jPanel28Layout);
+    jPanel28Layout.setHorizontalGroup(
+        jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel28Layout.createSequentialGroup()
+            .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 654, Short.MAX_VALUE))
+    );
+    jPanel28Layout.setVerticalGroup(
+        jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel28Layout.createSequentialGroup()
+            .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE))
+        .addGroup(jPanel28Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(864, Short.MAX_VALUE))
+    );
+
+    parent_tabbed.addTab("Annulation", jPanel28);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -3384,6 +3530,93 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rd_action_bookingStateChanged
 
+    private void btn_cancel_bookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancel_bookingActionPerformed
+        // TODO add your handling code here:
+        trashController trash=new trashController();
+        bookingController bController=new bookingController();
+        DefaultTableModel modelCancelBooking=(DefaultTableModel) tble_cancel_booking.getModel();
+        
+        try {
+            int code=Integer.parseInt(tx_search_cancel_invoice.getText());
+            List<Map<String,Object>> list=bController.getBookingToCancel(code);
+            if (list.size()>0) {
+                btn_cancel_booking_order.setEnabled(true);
+            } else {
+                btn_cancel_booking_order.setEnabled(false);
+            }
+            double totalCancel=0.0;
+            modelCancelBooking.getDataVector().removeAllElements();
+            for (Map object : list) {
+                 modelCancelBooking.insertRow(
+                         modelCancelBooking.getRowCount(), 
+                         new Object[]
+                         {
+                             object.get("datecmd"),
+                             object.get("idprod"),
+                             object.get("nameprod"),
+                             object.get("qte"),
+                             object.get("price")
+                         }
+                 );
+                 totalCancel+=(Integer.parseInt(object.get("qte").toString())*Double.parseDouble(object.get("price").toString()));
+            }
+            lbl_total_cancel.setText("Total reservation : "+totalCancel);
+            actionType=ActionType.BOOKING;
+            trashController.arrayData=list;
+            trash.setDataInTrash(actionType);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_cancel_bookingActionPerformed
+
+    private void btn_cancel_booking_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancel_booking_orderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cancel_booking_orderActionPerformed
+
+    private ActionType actionType;
+    private void btn_cancel_orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancel_orderActionPerformed
+        // TODO add your handling code here:
+        trashController trash=new trashController();
+        orderController oController=new orderController();
+        DefaultTableModel modelCancelOrder=(DefaultTableModel)tble_cancel_booking.getModel();
+        try {
+            List<Map<String,Object>>list=oController.getOrdeToCancel(Integer.parseInt(tx_search_cancel_invoice.getText()));
+            System.out.println(list.size());
+            if (list.size()>0) {
+                btn_cancel_booking_order.setEnabled(true);
+            } else {
+                btn_cancel_booking_order.setEnabled(false);
+            }
+             double totalCancel=0.0;
+            modelCancelOrder.getDataVector().removeAllElements();
+            for (Map object : list) {
+                 modelCancelOrder.insertRow(
+                         modelCancelOrder.getRowCount(), 
+                         new Object[]
+                         {
+                             object.get("datecmd"),
+                             object.get("idprod"),
+                             object.get("nameprod"),
+                             object.get("qte"),
+                             object.get("price")
+                         }
+                 );
+                 totalCancel+=(Integer.parseInt(object.get("qte").toString())*Double.parseDouble(object.get("price").toString()));
+            }
+            lbl_total_cancel.setText("Total commande : "+totalCancel);
+            actionType=ActionType.ORDER;
+            trashController.arrayData=list;
+            trash.setDataInTrash(actionType);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_cancel_orderActionPerformed
+
     private void clearOrders(){
            //
              int MAX_SIZE=modelCmd.getRowCount();
@@ -3493,6 +3726,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btn_billing_weekly;
     private javax.swing.JButton btn_blling_choices;
     private javax.swing.JButton btn_blling_monthly;
+    private javax.swing.JButton btn_cancel_booking;
+    private javax.swing.JButton btn_cancel_booking_order;
+    private javax.swing.JButton btn_cancel_order;
     private javax.swing.JButton btn_create_rate;
     private javax.swing.JButton btn_print_menu;
     private javax.swing.JButton btn_update_product;
@@ -3526,6 +3762,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3553,7 +3790,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -3565,6 +3805,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
@@ -3573,6 +3814,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel lb_taux;
     private javax.swing.JLabel lblTot_filter;
     private javax.swing.JLabel lbl_timer;
+    private javax.swing.JLabel lbl_total_cancel;
     private javax.swing.JLabel lbl_user;
     private javax.swing.JLabel lbltotf;
     private javax.swing.JTabbedPane parent_tabbed;
@@ -3582,6 +3824,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JRadioButton rd_suppr;
     private javax.swing.JSpinner sp_amount;
     private javax.swing.JTable tble_accomp;
+    private javax.swing.JTable tble_cancel_booking;
     private javax.swing.JTable tble_command;
     private javax.swing.JTable tble_orderBilling;
     private javax.swing.JTable tble_plat;
@@ -3598,6 +3841,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField tx_filter_plat;
     private javax.swing.JTextField tx_nameProduct;
     private javax.swing.JPasswordField tx_passwor_create;
+    private javax.swing.JTextField tx_search_cancel_invoice;
     private javax.swing.JTextField tx_serverName;
     private javax.swing.JLabel tx_tot_paie;
     private javax.swing.JTextField tx_username;

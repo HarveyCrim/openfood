@@ -15,8 +15,10 @@ import com.openfoods.models.rates;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -254,6 +256,31 @@ public class bookingController {
          }
          return Orders;
      }
-     
+     public List<Map<String,Object>>getBookingToCancel(int code) throws ClassNotFoundException, SQLException{
+         List<Map<String,Object>> arrayData=new LinkedList<>();
+         String query="SELECT invoices.id,cmd.idfood,foods.namefood,foods.price,cmd.qte,invoices.dateInvoice FROM t_invoices_booking as invoices join t_commands_booking as cmd "+
+                      "on cmd.idInvoice=invoices.id join t_foods as foods on foods.id=cmd.idfood where invoices.id="+code;
+         sqldb=new SQLDB();
+         sqldb.setQuery(query, new IAsyncQuery() {
+             @Override
+             public void getResult(ResultSet resultSet) {
+                 try {
+                     while (resultSet.next()) {
+                            Map<String,Object> map=new HashMap<>();
+                            map.put("invoiceid", resultSet.getInt("id"));
+                            map.put("idprod", resultSet.getInt("idfood"));
+                            map.put("nameprod", resultSet.getString("namefood"));
+                            map.put("qte", resultSet.getInt("qte"));
+                            map.put("price", resultSet.getDouble("price"));
+                            map.put("datecmd", resultSet.getDate("dateInvoice"));
+                            arrayData.add(map);
+                     }
+                 } catch (SQLException ex) {
+                     Logger.getLogger(bookingController.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }
+         });
+         return arrayData;
+     }
      
 }

@@ -182,7 +182,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`, invoices.`id`]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="44" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement style="Detail" x="3" y="0" width="14" height="15" uuid="2da78db6-e484-42f6-bd34-c38040914434"/>
 				<textElement>
@@ -193,19 +193,19 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`, invoices.`id`]]>
 			<textField>
 				<reportElement style="Detail" x="162" y="1" width="74" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
 				<textElement>
-					<font size="10"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="18" y="1" width="142" height="42" uuid="c08dc020-1698-4791-ba39-196575196292"/>
+				<reportElement stretchType="RelativeToBandHeight" x="18" y="1" width="144" height="14" uuid="c08dc020-1698-4791-ba39-196575196292"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{namefood}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="43" width="555" height="1" uuid="28989903-785f-441f-ad49-c9faec42de12"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="28989903-785f-441f-ad49-c9faec42de12"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>

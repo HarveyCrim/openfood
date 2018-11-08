@@ -26,18 +26,40 @@ public class trashController {
         switch(actionType){
             case BOOKING:
                 for (Map<String, Object> map : arrayData) {
-                    query="INSERT INTO (invoiceid,datecmd,qte,idfood,foodname,price,datetrash,type) VALUES ('"+map.get("invoiceid")+"','"+map.get("datecmd")+"','"+map.get("qte")+"','"+map.get("idprod")+"',,'"+map.get("nameprod")+"','"+date.toString()+"','BOOKING')";
+                    query="INSERT INTO t_trash(invoiceid,datecmd,qte,idfood,foodname,price,datetrash,type) VALUES ('"+map.get("invoiceid")+"','"+map.get("datecmd")+"','"+map.get("qte")+"','"+map.get("idprod")+"','"+map.get("nameprod")+"','"+map.get("price")+"','"+date.toString()+"','BOOKING')";
+                    sqldb.setQueryUpdate(query);
+                }
+                 for (Map<String, Object> map : arrayData) {
+                    String idInvoice=map.get("invoiceid").toString();
+                    query="DELETE FROM t_commands_booking WHERE idInvoice="+idInvoice;
                     sqldb.setQueryUpdate(query);
                 }
                 
+                for (Map<String, Object> map : arrayData) {
+                    String idInvoice=map.get("invoiceid").toString();
+                    query="DELETE FROM t_invoices_booking WHERE id="+idInvoice;
+                    sqldb.setQueryUpdate(query);
+                }
                 
                 break;
                 
             case ORDER:
                 for (Map<String, Object> map : arrayData) {
-                    query="INSERT INTO (invoiceid,datecmd,qte,idfood,foodname,price,datetrash,type) VALUES ('"+map.get("invoiceid")+"','"+map.get("datecmd")+"','"+map.get("qte")+"','"+map.get("idprod")+"',,'"+map.get("nameprod")+"','"+date.toString()+"','ORDER')";
+                    query="INSERT INTO t_trash(invoiceid,datecmd,qte,idfood,foodname,price,datetrash,type) VALUES ('"+map.get("invoiceid")+"','"+map.get("datecmd")+"','"+map.get("qte")+"','"+map.get("idprod")+"','"+map.get("nameprod")+"','"+map.get("price")+"','"+date.toString()+"','ORDER')";
                     sqldb.setQueryUpdate(query);
                 }
+                for (Map<String, Object> map : arrayData) {
+                    String idInvoice=map.get("invoiceid").toString();
+                    query="DELETE FROM t_commands WHERE idInvoice="+idInvoice;
+                    sqldb.setQueryUpdate(query);
+                }
+                
+                for (Map<String, Object> map : arrayData) {
+                    String idInvoice=map.get("invoiceid").toString();
+                    query="DELETE FROM t_invoices WHERE id="+idInvoice;
+                    sqldb.setQueryUpdate(query);
+                }
+                
                 break;
         }
         return true;

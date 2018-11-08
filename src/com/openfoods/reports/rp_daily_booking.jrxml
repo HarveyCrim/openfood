@@ -8,16 +8,29 @@
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="date" class="java.lang.String"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT foods.`namefood`, SUM(cmd.`qte`) AS qte, SUM(cmd.`amount`) AS amount, SUM(invoices.`totalPaie`) AS TotalFacture, rates.`FC` AS rate,users.`fullname` AS username,invoices.`id` AS tciket
- FROM t_invoices_booking invoices JOIN t_commands_booking cmd ON invoices.`id`=cmd.`idInvoice`
-JOIN t_foods foods ON foods.`id`=cmd.`idfood` JOIN t_rates rates ON rates.`idRate`=invoices.`idRate` JOIN t_users users ON users.`id`=cmd.`iduser`
-WHERE invoices.`dateInvoice`=$P{date}
-GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
+	<queryString>
+		<![CDATA[SELECT
+     SUM(cmd.`qte`) AS qte,
+     SUM(cmd.`amount`) AS amount,
+     SUM(invoices.`totalPaie`) AS TotalFacture,
+     foods.`namefood`,
+     rates.`FC` AS rate,
+     users.`fullname` AS username,
+     invoices.`id` AS ticket,
+     invoices.`totaltopaid` AS totaltopaid
+FROM
+     `t_invoices_booking` invoices INNER JOIN `t_commands_booking` cmd ON invoices.`id` = cmd.`idInvoice`
+     INNER JOIN `t_rates` rates ON invoices.`idRate` = rates.`idRate`
+     INNER JOIN `t_users` users ON cmd.`iduser` = users.`id`
+     INNER JOIN `t_foods` foods ON cmd.`idfood` = foods.`id`
+WHERE
+     invoices.`dateInvoice` = $P{date}
+GROUP BY
+     foods.`namefood`,
+     rates.`idRate`,
+     users.`id`,
+     invoices.`id`]]>
 	</queryString>
-	<field name="namefood" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="qte" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -25,35 +38,29 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="TotalFacture" class="java.lang.Double"/>
+	<field name="namefood" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="rate" class="java.lang.Double"/>
 	<field name="username" class="java.lang.String"/>
-	<field name="ticket" class="java.lang.String"/>
+	<field name="ticket" class="java.lang.Integer"/>
+	<field name="totaltopaid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<variable name="date" class="java.lang.String"/>
+	<variable name="totalAlls" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalFacture}]]></variableExpression>
+	</variable>
+	<variable name="totalPaidAlls" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{totaltopaid}]]></variableExpression>
+	</variable>
+	<variable name="amountAlls" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+	</variable>
 	<group name="username">
 		<groupExpression><![CDATA[$F{username}]]></groupExpression>
 		<groupHeader>
-			<band height="52">
-				<staticText>
-					<reportElement style="Column header" x="0" y="34" width="17" height="15" forecolor="#000000" uuid="07cf4ab8-9397-41e3-937a-377dc1958d7e"/>
-					<textElement>
-						<font size="10"/>
-					</textElement>
-					<text><![CDATA[qte]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" x="21" y="34" width="38" height="15" forecolor="#000000" uuid="9258d24a-712a-47b4-806f-48bc8d5adf42"/>
-					<textElement>
-						<font size="10"/>
-					</textElement>
-					<text><![CDATA[produit]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" x="128" y="34" width="41" height="15" forecolor="#000000" uuid="811fb937-8865-4ead-b8cc-f2761dd47824"/>
-					<textElement>
-						<font size="10"/>
-					</textElement>
-					<text><![CDATA[Montant]]></text>
-				</staticText>
+			<band height="16">
 				<textField>
 					<reportElement style="SubTitle" x="3" y="0" width="253" height="16" forecolor="#000000" uuid="d163cfda-63fe-4b35-9757-cc54a18148bc"/>
 					<textElement>
@@ -61,38 +68,113 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement style="Detail" x="3" y="19" width="92" height="15" uuid="80bfd722-b5d4-4aff-bb9a-2eabdf78eea6"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Taux du jour: "+$F{rate}]]></textFieldExpression>
-				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="30">
+			<band height="187">
 				<textField>
-					<reportElement style="Detail" x="107" y="2" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+					<reportElement style="Detail" x="1" y="13" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
 					<textElement>
-						<font size="8"/>
+						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["CDF "+$F{TotalFacture}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["CDF "+$V{totalAlls}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="3" y="2" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
+					<reportElement x="1" y="0" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[TOTAL GENERAL]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="107" y="16" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<reportElement style="Detail" x="1" y="26" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["USD "+$V{totalAlls}/$F{rate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="43" width="100" height="12" uuid="19780c71-d3b1-499b-9829-049e0be5d4a6"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AVANCE PAYÉE]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Detail" x="1" y="58" width="111" height="12" uuid="3bd5ab9d-2424-42cd-a94a-c081bb4c7fc7"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CDF "+($V{totalAlls}-$V{totalPaidAlls})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="1" y="71" width="111" height="14" uuid="9751db9a-b01c-4dda-965f-0c8df03e882b"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["USD "+(($V{totalAlls}-$V{totalPaidAlls})/$F{rate})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="156" width="248" height="14" uuid="00192a5a-823c-48a5-88eb-1c9fdc37798e"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[             Ouvert tous les jours de 12h a 23h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="125" width="248" height="14" uuid="19dbc34b-1285-44fd-9966-a994e9e9c6bb"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA["USD "+$F{TotalFacture}/$F{rate}]]></textFieldExpression>
+					<text><![CDATA[---------------------------------------------------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="140" width="248" height="14" uuid="4ce021ac-5263-4962-baa9-050e4c55be22"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[                       Merci de votre visite ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="172" width="248" height="14" uuid="33cfb49f-3132-4f22-8057-82cdb38305a1"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[---------------------------------------------------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="4" y="86" width="100" height="12" uuid="975cda6a-9101-4905-a326-b479d82c23bc"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RESTE A PAYER]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Detail" x="4" y="109" width="111" height="14" uuid="cc9ef580-a202-4a24-bc5c-ba6d479b5d5c"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["USD "+($V{totalPaidAlls}/$F{rate})]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement style="Detail" x="4" y="97" width="111" height="14" uuid="99d8b010-0079-4e83-993e-060168d784da"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CDF "+$V{totalPaidAlls}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="-2" y="83" width="109" height="1" uuid="e1b4b491-6588-424c-adc6-3a9c82e22b22"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="39" width="109" height="1" uuid="161afa7c-c3ac-4414-8fe2-331386ea2e24"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
 			</band>
 		</groupFooter>
 	</group>
@@ -100,7 +182,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="87" splitType="Stretch">
+		<band height="104" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="6" y="1" width="250" height="33" uuid="b4545d69-f41a-479b-8b0e-74358dbdeac5"/>
 				<textElement verticalAlignment="Middle">
@@ -129,6 +211,13 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 				</textElement>
 				<text><![CDATA[Tel : (+243)894023625]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="4" y="86" width="186" height="12" uuid="f6af4357-d02d-4e03-b93b-de8356225f07"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAPPORT JOURNALIER/RESERVATION]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -148,7 +237,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="28989903-785f-441f-ad49-c9faec42de12"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="256" height="1" uuid="28989903-785f-441f-ad49-c9faec42de12"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -161,16 +250,16 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 				<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="122" y="1" width="74" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
+				<reportElement style="Detail" x="146" y="1" width="100" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
 				<textElement>
-					<font size="10"/>
+					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["CDF "+$F{amount}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement style="Detail" x="19" y="1" width="97" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="19" y="1" width="116" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9" isBold="true" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{namefood}.toLowerCase()]]></textFieldExpression>
 			</textField>

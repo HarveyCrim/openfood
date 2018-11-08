@@ -145,6 +145,7 @@ public class LoginForm extends javax.swing.JFrame {
       dashboard.setIconImage(icon.getImage());
       dashboard.setVisible(true);
     }
+ 
     /**
      * @param args the command line arguments
      */

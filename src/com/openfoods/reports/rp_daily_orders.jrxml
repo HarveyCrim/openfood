@@ -8,12 +8,12 @@
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="date" class="java.lang.String"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT foods.`namefood`, SUM(cmd.`qte`) AS qte, SUM(cmd.`amount`) AS amount, SUM(invoices.`totalPaie`) AS TotalFacture, rates.`FC` AS rate,users.`fullname` AS username,invoices.`id` AS tciket
+	<queryString>
+		<![CDATA[SELECT foods.`namefood`, SUM(cmd.`qte`) AS qte, SUM(cmd.`amount`) AS amount, SUM(invoices.`totalPaie`) AS TotalFacture, rates.`FC` AS rate,users.`fullname` AS username
  FROM t_invoices invoices JOIN t_commands cmd ON invoices.`id`=cmd.`idInvoice`
 JOIN t_foods foods ON foods.`id`=cmd.`idfood` JOIN t_rates rates ON rates.`idRate`=invoices.`idRate` JOIN t_users users ON users.`id`=cmd.`iduser`
 WHERE invoices.`dateInvoice`=$P{date}
-GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
+GROUP BY foods.`namefood`, rates.`idRate`,users.`id`]]>
 	</queryString>
 	<field name="namefood" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -27,8 +27,10 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 	<field name="TotalFacture" class="java.lang.Double"/>
 	<field name="rate" class="java.lang.Double"/>
 	<field name="username" class="java.lang.String"/>
-	<field name="ticket" class="java.lang.String"/>
 	<variable name="date" class="java.lang.String"/>
+        <variable name="totalOrder" class="java.lang.Integer" calculation="Sum">
+            <variableExpression><![CDATA[$F{TotalFacture}]]></variableExpression>
+        </variable>
 	<group name="username">
 		<groupExpression><![CDATA[$F{username}]]></groupExpression>
 		<groupHeader>
@@ -48,7 +50,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 					<text><![CDATA[produit]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="Column header" x="128" y="34" width="41" height="15" forecolor="#000000" uuid="811fb937-8865-4ead-b8cc-f2761dd47824"/>
+					<reportElement style="Column header" x="159" y="34" width="41" height="15" forecolor="#000000" uuid="811fb937-8865-4ead-b8cc-f2761dd47824"/>
 					<textElement>
 						<font size="10"/>
 					</textElement>
@@ -57,7 +59,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 				<textField>
 					<reportElement style="SubTitle" x="3" y="0" width="253" height="16" forecolor="#000000" uuid="d163cfda-63fe-4b35-9757-cc54a18148bc"/>
 					<textElement>
-						<font size="12" isBold="true"/>
+						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
 				</textField>
@@ -71,11 +73,11 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="30">
+			<band height="107">
 				<textField>
-					<reportElement style="Detail" x="107" y="2" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+					<reportElement style="Detail" x="124" y="2" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
 					<textElement>
-						<font size="8"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["CDF "+$F{TotalFacture}]]></textFieldExpression>
 				</textField>
@@ -87,12 +89,40 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 					<text><![CDATA[TOTAL GENERAL]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="107" y="16" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<reportElement style="Detail" x="124" y="16" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
 					<textElement>
-						<font size="8"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["USD "+$F{TotalFacture}/$F{rate}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="1" y="46" width="248" height="14" uuid="b8b025f2-6ac1-4cac-aa86-3b4582d2c67c"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[                       Merci de votre visite ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="64" width="248" height="14" uuid="8a1be67b-e339-446f-b881-94bc5febf545"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[             Ouvert tous les jours de 12h a 23h]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="80" width="248" height="14" uuid="819dba7b-b69b-4a15-b839-5097cc897dff"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[---------------------------------------------------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="29" width="248" height="14" uuid="ae0c34f6-ff49-4765-9ec7-1d276db7e8b7"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[---------------------------------------------------]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -100,7 +130,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="87" splitType="Stretch">
+		<band height="104" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="6" y="1" width="250" height="33" uuid="b4545d69-f41a-479b-8b0e-74358dbdeac5"/>
 				<textElement verticalAlignment="Middle">
@@ -128,6 +158,13 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tel : (+243)894023625]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="84" width="186" height="12" uuid="dbc21753-d5b7-4518-b8a6-6d4c1fff5f02"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAPPORT JOURNALIER/COMMANDES]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -161,16 +198,16 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`,invoices.`id`]]>
 				<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="122" y="1" width="74" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
+				<reportElement style="Detail" x="160" y="1" width="74" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement style="Detail" x="19" y="1" width="97" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="19" y="1" width="137" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>
 				<textElement>
-					<font size="10"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{namefood}.toLowerCase()]]></textFieldExpression>
 			</textField>

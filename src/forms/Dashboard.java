@@ -105,14 +105,14 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             String path =System.getProperty("user.dir")+"/src/com/openfoods/images/icon.png";
             System.out.println("Path:"+child_config.getTitleAt(0).toString());
-            child_config.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-rice-bowl-528.png")));
-            child_config.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-coins-48.png")));
-            child_config.setIconAt(2,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-account-48.png")));
+            //child_config.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-rice-bowl-528.png")));
+            //child_config.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-coins-48.png")));
+            //child_config.setIconAt(2,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-account-48.png")));
             parent_tabbed.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shopping-cart-48.png")));
             parent_tabbed.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-print-48.png")));
             parent_tabbed.setIconAt(2,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-settings-48.png")));
-            parent_tabbed.setIconAt(3,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shutdown-40.png")));
-            parent_tabbed.setIconAt(4,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-about-48.png")));
+            parent_tabbed.setIconAt(3,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-about-48.png")));
+            parent_tabbed.setIconAt(4,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shutdown-40.png")));
             jTabbedPane1.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-rice-bowl-100.png")));
             jTabbedPane1.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shopping-cart-48.png")));
         } catch (Exception e) {
@@ -692,12 +692,12 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tble_product.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tble_productAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tble_product.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
@@ -767,12 +767,12 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tble_plat.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tble_platAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tble_plat.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
@@ -829,12 +829,12 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tble_accomp.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tble_accompAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tble_accomp.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
@@ -893,12 +893,12 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         tble_command.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tble_commandAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tble_command.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
@@ -957,7 +957,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(cb_client, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel31.setBorder(javax.swing.BorderFactory.createTitledBorder("TOTAL A PAYER"));
@@ -1081,9 +1081,9 @@ public class Dashboard extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1110,14 +1110,14 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21))
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1048, Short.MAX_VALUE))
+                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(1136, Short.MAX_VALUE))
         );
 
         parent_tabbed.addTab("Nouvelle demande", jPanel1);

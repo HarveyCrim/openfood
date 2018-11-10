@@ -60,121 +60,164 @@ GROUP BY
 	<group name="username">
 		<groupExpression><![CDATA[$F{username}]]></groupExpression>
 		<groupHeader>
-			<band height="16">
+			<band height="37">
 				<textField>
 					<reportElement style="SubTitle" x="3" y="0" width="253" height="16" forecolor="#000000" uuid="d163cfda-63fe-4b35-9757-cc54a18148bc"/>
 					<textElement>
-						<font size="12" isBold="true"/>
+						<font size="9" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Livreur : "+$F{username}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="3" y="16" width="92" height="15" uuid="3a7f92bd-8e5c-410a-9b0c-9e1272c446a1"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Taux du jour: "+$F{rate}+ " Fc"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="187">
+			<band height="333">
 				<textField>
-					<reportElement style="Detail" x="1" y="13" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+					<reportElement style="Detail" x="148" y="21" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["CDF "+$V{totalAlls}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{totalAlls}+" FC"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="0" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
+					<reportElement x="148" y="8" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[TOTAL GENERAL]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="1" y="26" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<reportElement style="Detail" x="148" y="34" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["USD "+$V{totalAlls}/$F{rate}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{totalAlls}/$F{rate}+'$']]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="43" width="100" height="12" uuid="19780c71-d3b1-499b-9829-049e0be5d4a6"/>
+					<reportElement x="150" y="52" width="100" height="12" uuid="19780c71-d3b1-499b-9829-049e0be5d4a6"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[AVANCE PAYÉE]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="1" y="58" width="111" height="12" uuid="3bd5ab9d-2424-42cd-a94a-c081bb4c7fc7"/>
+					<reportElement style="Detail" x="148" y="64" width="111" height="12" uuid="3bd5ab9d-2424-42cd-a94a-c081bb4c7fc7"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["CDF "+($V{totalAlls}-$V{totalPaidAlls})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{totalAlls}-$V{totalPaidAlls})+" FC"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" x="1" y="71" width="111" height="14" uuid="9751db9a-b01c-4dda-965f-0c8df03e882b"/>
+					<reportElement style="Detail" x="148" y="76" width="111" height="14" uuid="9751db9a-b01c-4dda-965f-0c8df03e882b"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["USD "+(($V{totalAlls}-$V{totalPaidAlls})/$F{rate})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[(($V{totalAlls}-$V{totalPaidAlls})/$F{rate})+'$']]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="2" y="156" width="248" height="14" uuid="00192a5a-823c-48a5-88eb-1c9fdc37798e"/>
+					<reportElement x="1" y="187" width="248" height="14" uuid="00192a5a-823c-48a5-88eb-1c9fdc37798e"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[             Ouvert tous les jours de 12h a 23h]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="3" y="125" width="248" height="14" uuid="19dbc34b-1285-44fd-9966-a994e9e9c6bb"/>
+					<reportElement x="2" y="156" width="248" height="14" uuid="19dbc34b-1285-44fd-9966-a994e9e9c6bb"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="3" y="140" width="248" height="14" uuid="4ce021ac-5263-4962-baa9-050e4c55be22"/>
+					<reportElement x="2" y="171" width="248" height="14" uuid="4ce021ac-5263-4962-baa9-050e4c55be22"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[                       Merci de votre visite ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="3" y="172" width="248" height="14" uuid="33cfb49f-3132-4f22-8057-82cdb38305a1"/>
+					<reportElement x="2" y="203" width="248" height="14" uuid="33cfb49f-3132-4f22-8057-82cdb38305a1"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="4" y="86" width="100" height="12" uuid="975cda6a-9101-4905-a326-b479d82c23bc"/>
+					<reportElement x="148" y="97" width="100" height="12" uuid="975cda6a-9101-4905-a326-b479d82c23bc"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[RESTE A PAYER]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="4" y="109" width="111" height="14" uuid="cc9ef580-a202-4a24-bc5c-ba6d479b5d5c"/>
+					<reportElement style="Detail" x="148" y="120" width="111" height="14" uuid="cc9ef580-a202-4a24-bc5c-ba6d479b5d5c"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["USD "+($V{totalPaidAlls}/$F{rate})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{totalPaidAlls}/$F{rate})+ '$']]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" x="4" y="97" width="111" height="14" uuid="99d8b010-0079-4e83-993e-060168d784da"/>
+					<reportElement style="Detail" x="148" y="108" width="111" height="14" uuid="99d8b010-0079-4e83-993e-060168d784da"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["CDF "+$V{totalPaidAlls}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{totalPaidAlls}+" FC"]]></textFieldExpression>
 				</textField>
 				<line>
-					<reportElement positionType="FixRelativeToBottom" x="-2" y="83" width="109" height="1" uuid="e1b4b491-6588-424c-adc6-3a9c82e22b22"/>
+					<reportElement positionType="FixRelativeToBottom" x="147" y="47" width="109" height="1" uuid="161afa7c-c3ac-4414-8fe2-331386ea2e24"/>
 					<graphicElement>
 						<pen lineWidth="0.5" lineColor="#999999"/>
 					</graphicElement>
 				</line>
-				<line>
-					<reportElement positionType="FixRelativeToBottom" x="0" y="39" width="109" height="1" uuid="161afa7c-c3ac-4414-8fe2-331386ea2e24"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineColor="#999999"/>
-					</graphicElement>
-				</line>
+				<staticText>
+					<reportElement style="SubTitle" x="146" y="0" width="489" height="16" forecolor="#000000" uuid="e2685811-bbd1-469a-a8df-ba7f51f18707"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[*************************************************************************************************************************************************]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="148" y="45" width="489" height="16" forecolor="#000000" uuid="0d297358-0849-43fd-b2b5-e1d516f5e602"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[*************************************************************************************************************************************************]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="146" y="90" width="489" height="16" forecolor="#000000" uuid="8fccc0ef-76b1-4c59-af78-b2a371b2418a"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[*************************************************************************************************************************************************]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-47" y="238" width="513" height="14" uuid="500983d7-de38-42bd-aef0-57cd73d65edc"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[---------------------------------------------------------------------------------------------------------------------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-4" y="217" width="248" height="14" uuid="a4d05642-b0aa-4566-9edf-8b94de731be8"/>
+					<textElement>
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[Besoin du logiciel ? Appelez le 0897967293]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="-3" y="274" width="296" height="16" forecolor="#000000" uuid="869899e3-7357-405a-b276-d2f34d12c7e7"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[**************COUPER*********************************COUPER**************************************************************************************************]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -184,39 +227,53 @@ GROUP BY
 	<title>
 		<band height="104" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="6" y="1" width="250" height="33" uuid="b4545d69-f41a-479b-8b0e-74358dbdeac5"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Restaurant Jielsa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="3" y="34" width="247" height="14" forecolor="#000000" uuid="3226a033-f76a-4993-94fb-7291f569bccc"/>
+				<reportElement x="2" y="77" width="186" height="12" uuid="f6af4357-d02d-4e03-b93b-de8356225f07"/>
 				<textElement>
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Chez Flore]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="3" y="49" width="247" height="12" forecolor="#000000" uuid="b537bb25-4cf2-4cdb-900c-1b64e02ccb7a"/>
-				<textElement textAlignment="Left">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[4093, Av. Progrès, Q/Bon marché, C/ Barumbu]]></text>
+				<text><![CDATA[RAPPORT JOURNALIER/RESERVATION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="0" y="62" width="250" height="16" forecolor="#000000" uuid="8c1497cd-b565-4834-8433-a615da0d7052"/>
-				<textElement textAlignment="Left">
+				<reportElement style="Title" x="1" y="5" width="253" height="14" uuid="514b8a72-1ef0-4e1e-b098-fa7d054407cf"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[RESTAURANT JIELSA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="30" width="247" height="12" forecolor="#000000" uuid="995737e5-892b-44c8-b285-921b2fc71ec1"/>
+				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tel : (+243)894023625]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="86" width="186" height="12" uuid="f6af4357-d02d-4e03-b93b-de8356225f07"/>
+				<reportElement style="SubTitle" x="0" y="67" width="489" height="16" forecolor="#000000" uuid="7f3a85db-b8aa-4bde-87ef-2bbbae7c0164"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*************************************************************************************************************************************************]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="19" width="253" height="14" forecolor="#000000" uuid="78680f2d-0d71-453a-95e6-db919364081b"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CHEZ FLORE VIP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="40" width="250" height="16" forecolor="#000000" uuid="292a97fd-3643-435e-afec-f19e1e7ec80a"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[RAPPORT JOURNALIER/RESERVATION]]></text>
+				<text><![CDATA[4093, Progrès  Q/ Bon marché,  C/ Barumbu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="-1" y="54" width="250" height="16" forecolor="#000000" uuid="8ff0c3b4-0add-4191-a899-cbad085a1deb"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KINSHASA- BARUMBU]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -226,7 +283,7 @@ GROUP BY
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement style="Column header" x="3" y="0" width="253" height="20" uuid="ddaee1e8-9ed0-4322-af67-938c16285ace"/>
+				<reportElement style="Column header" x="3" y="-8" width="253" height="20" uuid="ddaee1e8-9ed0-4322-af67-938c16285ace"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
@@ -252,9 +309,9 @@ GROUP BY
 			<textField>
 				<reportElement style="Detail" x="146" y="1" width="100" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["CDF "+$F{amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount}+" FC"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Detail" x="19" y="1" width="116" height="15" uuid="ed473110-b347-4bfe-99be-16903f1a8c97"/>

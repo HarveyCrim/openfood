@@ -29,7 +29,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`]]>
 	<field name="username" class="java.lang.String"/>
 	<variable name="date" class="java.lang.String"/>
 	<variable name="totalOrder" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{TotalFacture}]]></variableExpression>
+		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
 	</variable>
 	<group name="username">
 		<groupExpression><![CDATA[$F{username}]]></groupExpression>
@@ -58,7 +58,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`]]>
 					<textElement>
 						<font size="9" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{TotalFacture}+" FC"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{totalOrder}+" FC"]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="1" y="12" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
@@ -72,7 +72,7 @@ GROUP BY foods.`namefood`, rates.`idRate`,users.`id`]]>
 					<textElement>
 						<font size="9" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{TotalFacture}/$F{rate}+'$']]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{totalOrder}/$F{rate}+'$']]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="0" y="69" width="248" height="14" uuid="b8b025f2-6ac1-4cac-aa86-3b4582d2c67c"/>

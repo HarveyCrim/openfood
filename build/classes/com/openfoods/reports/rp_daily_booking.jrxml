@@ -80,42 +80,42 @@ GROUP BY
 		<groupFooter>
 			<band height="333">
 				<textField>
-					<reportElement style="Detail" x="148" y="21" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
+					<reportElement style="Detail" x="138" y="19" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{totalAlls}+" FC"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="148" y="8" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
+					<reportElement x="139" y="8" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[TOTAL GENERAL]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="148" y="34" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
+					<reportElement style="Detail" x="138" y="31" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{totalAlls}/$F{rate}+'$']]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="150" y="52" width="100" height="12" uuid="19780c71-d3b1-499b-9829-049e0be5d4a6"/>
+					<reportElement x="140" y="47" width="100" height="12" uuid="19780c71-d3b1-499b-9829-049e0be5d4a6"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[AVANCE PAYÉE]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="148" y="64" width="111" height="12" uuid="3bd5ab9d-2424-42cd-a94a-c081bb4c7fc7"/>
+					<reportElement style="Detail" x="138" y="59" width="111" height="12" uuid="3bd5ab9d-2424-42cd-a94a-c081bb4c7fc7"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($V{totalAlls}-$V{totalPaidAlls})+" FC"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" x="148" y="76" width="111" height="14" uuid="9751db9a-b01c-4dda-965f-0c8df03e882b"/>
+					<reportElement style="Detail" x="138" y="71" width="111" height="14" uuid="9751db9a-b01c-4dda-965f-0c8df03e882b"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
@@ -150,48 +150,42 @@ GROUP BY
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="148" y="97" width="100" height="12" uuid="975cda6a-9101-4905-a326-b479d82c23bc"/>
+					<reportElement x="138" y="92" width="100" height="12" uuid="975cda6a-9101-4905-a326-b479d82c23bc"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[RESTE A PAYER]]></text>
 				</staticText>
 				<textField>
-					<reportElement style="Detail" x="148" y="120" width="111" height="14" uuid="cc9ef580-a202-4a24-bc5c-ba6d479b5d5c"/>
+					<reportElement style="Detail" x="138" y="115" width="111" height="14" uuid="cc9ef580-a202-4a24-bc5c-ba6d479b5d5c"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($V{totalPaidAlls}/$F{rate})+ '$']]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" x="148" y="108" width="111" height="14" uuid="99d8b010-0079-4e83-993e-060168d784da"/>
+					<reportElement style="Detail" x="138" y="103" width="111" height="14" uuid="99d8b010-0079-4e83-993e-060168d784da"/>
 					<textElement>
 						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{totalPaidAlls}+" FC"]]></textFieldExpression>
 				</textField>
-				<line>
-					<reportElement positionType="FixRelativeToBottom" x="147" y="47" width="109" height="1" uuid="161afa7c-c3ac-4414-8fe2-331386ea2e24"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineColor="#999999"/>
-					</graphicElement>
-				</line>
 				<staticText>
-					<reportElement style="SubTitle" x="146" y="0" width="489" height="16" forecolor="#000000" uuid="e2685811-bbd1-469a-a8df-ba7f51f18707"/>
+					<reportElement style="SubTitle" x="137" y="0" width="489" height="16" forecolor="#000000" uuid="e2685811-bbd1-469a-a8df-ba7f51f18707"/>
 					<textElement textAlignment="Left">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[*************************************************************************************************************************************************]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="SubTitle" x="148" y="45" width="489" height="16" forecolor="#000000" uuid="0d297358-0849-43fd-b2b5-e1d516f5e602"/>
+					<reportElement style="SubTitle" x="137" y="40" width="489" height="16" forecolor="#000000" uuid="0d297358-0849-43fd-b2b5-e1d516f5e602"/>
 					<textElement textAlignment="Left">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[*************************************************************************************************************************************************]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="SubTitle" x="146" y="90" width="489" height="16" forecolor="#000000" uuid="8fccc0ef-76b1-4c59-af78-b2a371b2418a"/>
+					<reportElement style="SubTitle" x="136" y="81" width="489" height="16" forecolor="#000000" uuid="8fccc0ef-76b1-4c59-af78-b2a371b2418a"/>
 					<textElement textAlignment="Left">
 						<font size="8" isBold="true"/>
 					</textElement>
@@ -307,7 +301,7 @@ GROUP BY
 				<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="146" y="1" width="100" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
+				<reportElement style="Detail" x="134" y="1" width="100" height="15" uuid="586734ca-2442-4aa0-aa76-7989ff3288f8"/>
 				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>

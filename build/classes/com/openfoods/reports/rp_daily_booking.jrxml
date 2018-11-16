@@ -8,6 +8,9 @@
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="date" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/hornellama/Desktop/gitprojects/openfood/src/com/openfoods/reports/"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      SUM(cmd.`qte`) AS qte,
@@ -79,138 +82,82 @@ GROUP BY
 		</groupHeader>
 		<groupFooter>
 			<band height="333">
-				<textField>
-					<reportElement style="Detail" x="138" y="19" width="111" height="12" uuid="01b9cb5f-2103-470e-b69a-27e937c71b42"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{totalAlls}+" FC"]]></textFieldExpression>
-				</textField>
 				<staticText>
-					<reportElement x="139" y="8" width="100" height="12" uuid="4af8adf4-dfa6-419f-b92d-2edd14897985"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[TOTAL GENERAL]]></text>
-				</staticText>
-				<textField>
-					<reportElement style="Detail" x="138" y="31" width="111" height="14" uuid="03aa7a66-5629-4e0c-9e34-e61593e16011"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{totalAlls}/$F{rate}+'$']]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="140" y="47" width="100" height="12" uuid="19780c71-d3b1-499b-9829-049e0be5d4a6"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[AVANCE PAYÉE]]></text>
-				</staticText>
-				<textField>
-					<reportElement style="Detail" x="138" y="59" width="111" height="12" uuid="3bd5ab9d-2424-42cd-a94a-c081bb4c7fc7"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{totalAlls}-$V{totalPaidAlls})+" FC"]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Detail" x="138" y="71" width="111" height="14" uuid="9751db9a-b01c-4dda-965f-0c8df03e882b"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[(($V{totalAlls}-$V{totalPaidAlls})/$F{rate})+'$']]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="1" y="187" width="248" height="14" uuid="00192a5a-823c-48a5-88eb-1c9fdc37798e"/>
+					<reportElement x="1" y="113" width="248" height="14" uuid="00192a5a-823c-48a5-88eb-1c9fdc37798e"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[             Ouvert tous les jours de 12h a 23h]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="156" width="248" height="14" uuid="19dbc34b-1285-44fd-9966-a994e9e9c6bb"/>
+					<reportElement x="2" y="82" width="248" height="14" uuid="19dbc34b-1285-44fd-9966-a994e9e9c6bb"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="171" width="248" height="14" uuid="4ce021ac-5263-4962-baa9-050e4c55be22"/>
+					<reportElement x="2" y="97" width="248" height="14" uuid="4ce021ac-5263-4962-baa9-050e4c55be22"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[                       Merci de votre visite ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="203" width="248" height="14" uuid="33cfb49f-3132-4f22-8057-82cdb38305a1"/>
+					<reportElement x="2" y="129" width="248" height="14" uuid="33cfb49f-3132-4f22-8057-82cdb38305a1"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="138" y="92" width="100" height="12" uuid="975cda6a-9101-4905-a326-b479d82c23bc"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[RESTE A PAYER]]></text>
-				</staticText>
-				<textField>
-					<reportElement style="Detail" x="138" y="115" width="111" height="14" uuid="cc9ef580-a202-4a24-bc5c-ba6d479b5d5c"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{totalPaidAlls}/$F{rate})+ '$']]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Detail" x="138" y="103" width="111" height="14" uuid="99d8b010-0079-4e83-993e-060168d784da"/>
-					<textElement>
-						<font size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{totalPaidAlls}+" FC"]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement style="SubTitle" x="137" y="0" width="489" height="16" forecolor="#000000" uuid="e2685811-bbd1-469a-a8df-ba7f51f18707"/>
-					<textElement textAlignment="Left">
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[*************************************************************************************************************************************************]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="SubTitle" x="137" y="40" width="489" height="16" forecolor="#000000" uuid="0d297358-0849-43fd-b2b5-e1d516f5e602"/>
-					<textElement textAlignment="Left">
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[*************************************************************************************************************************************************]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="SubTitle" x="136" y="81" width="489" height="16" forecolor="#000000" uuid="8fccc0ef-76b1-4c59-af78-b2a371b2418a"/>
-					<textElement textAlignment="Left">
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[*************************************************************************************************************************************************]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="-47" y="238" width="513" height="14" uuid="500983d7-de38-42bd-aef0-57cd73d65edc"/>
+					<reportElement x="-47" y="164" width="536" height="14" uuid="500983d7-de38-42bd-aef0-57cd73d65edc"/>
 					<textElement>
 						<font size="8"/>
 					</textElement>
 					<text><![CDATA[---------------------------------------------------------------------------------------------------------------------]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="-4" y="217" width="248" height="14" uuid="a4d05642-b0aa-4566-9edf-8b94de731be8"/>
+					<reportElement x="-4" y="143" width="248" height="14" uuid="a4d05642-b0aa-4566-9edf-8b94de731be8"/>
 					<textElement>
 						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[Besoin du logiciel ? Appelez le 0897967293]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="SubTitle" x="-3" y="274" width="296" height="16" forecolor="#000000" uuid="869899e3-7357-405a-b276-d2f34d12c7e7"/>
+					<reportElement style="SubTitle" x="-3" y="200" width="296" height="16" forecolor="#000000" uuid="869899e3-7357-405a-b276-d2f34d12c7e7"/>
 					<textElement textAlignment="Left">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[**************COUPER*********************************COUPER**************************************************************************************************]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="-1" width="133" height="20" uuid="9a6b65ea-a57c-4497-9b99-a5c88efb206f"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["***************************************************"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="3" y="16" width="181" height="20" uuid="bc65b4d5-612e-4b2f-a0e0-be772f1d8fd0"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{amountAlls}+" FC"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="1" y="28" width="181" height="20" uuid="dc5a80aa-06ba-4ee6-b22d-1c672c78b580"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{amountAlls}/1600)+'$']]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="4" width="100" height="20" uuid="6dca28de-6895-4dea-9043-3b67eaa1cb75"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL GENERAL]]></text>
 				</staticText>
 			</band>
 		</groupFooter>
@@ -221,7 +168,7 @@ GROUP BY
 	<title>
 		<band height="104" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="77" width="186" height="12" uuid="f6af4357-d02d-4e03-b93b-de8356225f07"/>
+				<reportElement x="-4" y="83" width="186" height="12" uuid="f6af4357-d02d-4e03-b93b-de8356225f07"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>

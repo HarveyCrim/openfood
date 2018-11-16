@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rp_daily_booking_subreport1" language="groovy" pageWidth="260" pageHeight="802" columnWidth="260" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="09477244-4f10-448f-9837-fbf56419bc37">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="2"/>
+	<property name="ireport.y" value="16"/>
+	<queryString>
+		<![CDATA[SELECT
+     SUM(invoices.`totalPaie`) AS amount,
+     SUM(invoices.`amountPaie`) AS totarecu,
+     SUM(invoices.`totaltopaid`) AS reste
+FROM
+     `t_invoices_booking` invoices 
+WHERE
+     invoices.`dateInvoice` ='2018-11-13']]>
+	</queryString>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totarecu" class="java.lang.Double"/>
+	<field name="reste" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="203" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="88" width="272" height="20" uuid="db0a435b-9e47-450f-aea3-2cc0c7757250"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["***************************************************"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="68" width="181" height="20" uuid="c6728238-1f8b-4cd3-8c90-3c2cc7699b63"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totarecu}+" FC"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="11" width="100" height="20" uuid="774a10ab-cbae-4bac-bd8b-6deacd70157c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GENERAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="122" width="181" height="20" uuid="ab0db32f-99ba-4042-b91f-cbc8a240e626"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reste}+" FC"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="23" width="181" height="20" uuid="ca90db08-4c30-4390-9d40-8c5b4153fbb9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}+" FC"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="56" width="100" height="20" uuid="7332232a-6351-46a1-a44f-163c990cfd83"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVANCE RECU]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="36" width="181" height="20" uuid="ab1d2637-4456-499e-98b4-13ad246409cb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{amount}/1600)+'$']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="48" width="272" height="20" uuid="24f0e763-0ec5-438c-87e0-16875925d437"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["***************************************************"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="105" width="100" height="20" uuid="0b80472c-07d2-4ae1-a887-c5e96eac8290"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESTE A PAYER]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="136" width="181" height="20" uuid="ac2ae0f7-243a-4ecc-b39f-2080dc67acf4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{reste}/1600)+'$']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="80" width="181" height="20" uuid="af11da4f-7fd6-4101-bc56-2ba7fea39709"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{totarecu}/1600)+'$']]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="77" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="165" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="153" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

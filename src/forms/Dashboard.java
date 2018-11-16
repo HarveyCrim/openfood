@@ -137,7 +137,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         timer.start();
-        
+      
            model =(DefaultTableModel)tble_product.getModel();
          
             for(food f:loginController.listFoods){
@@ -154,6 +154,7 @@ public class Dashboard extends javax.swing.JFrame {
                
 
             }
+            
             modelCmd=(DefaultTableModel)tble_command.getModel();
             
                 TableColumnModel tableColumnModel=tble_product.getColumnModel();
@@ -2243,6 +2244,7 @@ public class Dashboard extends javax.swing.JFrame {
                    Connection cnx=sqldb.getConnection();
                    Map<String,Object> map=new HashMap<>();
                  map.put("idTicket", bl.getIdBilling());
+                 
                    JasperPrint jprint=JasperFillManager.fillReport(path, map, cnx);
                    JasperViewer.viewReport(jprint, false);
                    this.clearOrders();
@@ -2261,8 +2263,10 @@ public class Dashboard extends javax.swing.JFrame {
         
             }
         }
+          
                 
         
+     
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -2338,11 +2342,12 @@ public class Dashboard extends javax.swing.JFrame {
     OrderBillingEnum obe;
     private void btnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyActionPerformed
         // TODO add your handling code here:
-         
+         final DefaultTableModel modelReportViewer=(DefaultTableModel)tble_orderBilling.getModel();
+         modelReportViewer.getDataVector().removeAllElements();
              switch(pType){
-                 case ORDERBILLING:      
+                 case ORDERBILLING:  
+                     tx_filter_cmd2.setText("");
                         orderController oc=new orderController();
-                        DefaultTableModel modelReportViewer=(DefaultTableModel)tble_orderBilling.getModel();
                         TableRowSorter<TableModel> tableRowSorter=new TableRowSorter<TableModel>(modelReportViewer);
                         modelReportViewer.getDataVector().removeAllElements();
                         try {
@@ -2416,12 +2421,14 @@ public class Dashboard extends javax.swing.JFrame {
                         } catch (SQLException ex) {
                             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                       
                      break;
                  case BOOKING:
-                               bookingController obController=new bookingController();
-                        DefaultTableModel modelReportViewerBooking=(DefaultTableModel)tble_orderBilling.getModel();
-                        TableRowSorter<TableModel> tableRowSorterBooking=new TableRowSorter<TableModel>(modelReportViewerBooking);
-                        modelReportViewerBooking.getDataVector().removeAllElements();
+                     tx_filter_cmd2.setText("");
+                       bookingController obController=new bookingController();
+                        
+                        TableRowSorter<TableModel> tableRowSorterBooking=new TableRowSorter<TableModel>(modelReportViewer);
+                        
                         try {
 
                             List<order>Orders=obController.getOrdersBilling(OrderBillingEnum.Daily);
@@ -2429,7 +2436,7 @@ public class Dashboard extends javax.swing.JFrame {
                             s.forEach((x) -> {
                                  double totFilter=0.0;
                                  order o=(order)x;
-                                modelReportViewerBooking.insertRow(tble_orderBilling.getRowCount(),
+                                modelReportViewer.insertRow(tble_orderBilling.getRowCount(),
                                         new Object[]{
                                         o.getFoood().getIdFood(),
                                         o.getFoood().getNameFood(),
@@ -2457,7 +2464,7 @@ public class Dashboard extends javax.swing.JFrame {
                                 public void insertUpdate(DocumentEvent e) {
                                    // DefaultTableModel modelReportViewer=(DefaultTableModel)tble_orderBilling.getModel();
                                     if (tx_filter_cmd2.getText().length()>0) {
-                                        TableRowSorter<TableModel> tableRowSorter=new TableRowSorter<TableModel>(modelReportViewerBooking);
+                                        TableRowSorter<TableModel> tableRowSorter=new TableRowSorter<TableModel>(modelReportViewer);
                                         tble_orderBilling.setRowSorter(tableRowSorter);
                                          tableRowSorter.setRowFilter(RowFilter.regexFilter(tx_filter_cmd2.getText().toUpperCase()));
 
@@ -2471,11 +2478,11 @@ public class Dashboard extends javax.swing.JFrame {
                                 public void removeUpdate(DocumentEvent e) {
                                     if (tx_filter_cmd2.getText().length()>0) {
                                         //DefaultTableModel modelReportViewer=(DefaultTableModel)tble_orderBilling.getModel();
-                                    TableRowSorter<TableModel> tableRowSorter=new TableRowSorter<TableModel>(modelReportViewerBooking);
+                                    TableRowSorter<TableModel> tableRowSorter=new TableRowSorter<TableModel>(modelReportViewer);
                                     tble_orderBilling.setRowSorter(tableRowSorter);
                                      tableRowSorter.setRowFilter(RowFilter.regexFilter(tx_filter_cmd2.getText().toUpperCase()));
                                     }else{
-                                        modelReportViewerBooking.getDataVector().removeAllElements();
+                                        modelReportViewer.getDataVector().removeAllElements();
 
                                     }
                                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -2690,8 +2697,14 @@ public class Dashboard extends javax.swing.JFrame {
                    Connection cnx=sqldb.getConnection();
                    Map<String,Object> map=new HashMap<>();
                   map.put("date", dateDaily);
+                  
+                  Map<String,Object> map2=new HashMap<String,Object>();
+                  map2.put("datedefault",dateDaily);
                   path =System.getProperty("user.dir")+"/src/com/openfoods/reports/rp_daily_booking.jasper";
+                  String path2 =System.getProperty("user.dir")+"/src/com/openfoods/reports/rp_daily_booking_subreport1_1.jasper";
                    JasperPrint jprint=JasperFillManager.fillReport(path, map, cnx);
+                   JasperPrint jprint2=JasperFillManager.fillReport(path2, map2, cnx);
+                  
                    JasperViewer.viewReport(jprint, false);
         }
     }
@@ -3670,6 +3683,9 @@ public class Dashboard extends javax.swing.JFrame {
        }catch(Exception e){
                    tx_tot_paie.setText("0.0");
        }
+       tx_filter_accomp.setText("");
+       tx_filter.setText("");
+       tx_filter_plat.setText("");
        model =(DefaultTableModel)tble_product.getModel();
        model.getDataVector().removeAllElements();
        modelPlat.getDataVector().removeAllElements();
@@ -3693,6 +3709,356 @@ public class Dashboard extends javax.swing.JFrame {
 //               
 //
 //            }
+    }
+    public void reInit() {
+        initComponents();
+        try {
+            String path =System.getProperty("user.dir")+"/src/com/openfoods/images/icon.png";
+            System.out.println("Path:"+child_config.getTitleAt(0).toString());
+            //child_config.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-rice-bowl-528.png")));
+            //child_config.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-coins-48.png")));
+            //child_config.setIconAt(2,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-user-account-48.png")));
+            parent_tabbed.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shopping-cart-48.png")));
+            parent_tabbed.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-print-48.png")));
+            parent_tabbed.setIconAt(2,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-settings-48.png")));
+            parent_tabbed.setIconAt(3,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-about-48.png")));
+            parent_tabbed.setIconAt(4,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shutdown-40.png")));
+            jTabbedPane1.setIconAt(0,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-rice-bowl-100.png")));
+            jTabbedPane1.setIconAt(1,new javax.swing.ImageIcon(getClass().getResource("/images/icons8-shopping-cart-48.png")));
+        } catch (Exception e) {
+            System.out.println("Console icon:"+e.getMessage());
+        }
+        if (!loginController._priority.equals("administrator")) {
+            parent_tabbed.remove(2);
+        }
+        cb_client.addItem("");
+        for(String s:loginController.listClients){
+            cb_client.addItem(s);
+        }
+        lbl_user.setText(loginController._usernameLogger);
+        lb_taux.setText(lb_taux.getText()+Double.toString(loginController.taux)+" CDF");
+        Timer timer=new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Calendar cal=Calendar.getInstance();
+               
+                Date dte=new Date();
+                lbl_timer.setText(cal.getTime().toLocaleString());
+            }
+        });
+        timer.start();
+      
+           model =(DefaultTableModel)tble_product.getModel();
+         
+            for(food f:loginController.listFoods){
+                if (f.getTypeFood().equals("BL")) {
+                      model.insertRow(model.getRowCount(), new Object[]{f.getIdFood(),f.getNameFood(),f.getPriceFood(),false});
+                }else if(f.getTypeFood().equals("PL")){
+                    modelPlat=(DefaultTableModel)tble_plat.getModel();
+                    modelPlat.insertRow(modelPlat.getRowCount(),new Object[]{f.getIdFood(),f.getNameFood(),f.getPriceFood(),false});
+                }else{
+                    modelAccompa=(DefaultTableModel)tble_accomp.getModel();
+                    modelAccompa.insertRow(modelAccompa.getRowCount(),new Object[]{f.getIdFood(),f.getNameFood(),f.getPriceFood(),false});
+                }
+                
+               
+
+            }
+            
+            modelCmd=(DefaultTableModel)tble_command.getModel();
+            
+                TableColumnModel tableColumnModel=tble_product.getColumnModel();
+                tableColumnModel.getColumn(0).setMaxWidth(50);
+                tableColumnModel.getColumn(1).setMaxWidth(300);
+                tableColumnModel.getColumn(2).setMaxWidth(80);
+                tableColumnModel.getColumn(3).setMaxWidth(50);
+                
+                
+                    TableColumnModel tableColumnModelPlat=tble_plat.getColumnModel();
+                    tableColumnModelPlat.getColumn(0).setMaxWidth(50);
+                    tableColumnModelPlat.getColumn(1).setMaxWidth(300);
+                    tableColumnModelPlat.getColumn(2).setMaxWidth(80);
+                    tableColumnModelPlat.getColumn(3).setMaxWidth(50);
+                    
+           TableColumnModel tableColumnModelAcc=tble_accomp.getColumnModel();
+           tableColumnModel.getColumn(0).setMaxWidth(50);
+           tableColumnModel.getColumn(1).setMaxWidth(300);
+           tableColumnModel.getColumn(2).setMaxWidth(80);
+           tableColumnModel.getColumn(3).setMaxWidth(50);
+           /* tble_product.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                System.out.println("Name cells:"+evt.getPropertyName());
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+            */
+    
+           
+           tble_command.getModel().addTableModelListener(new TableModelListener(){
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                try {
+                     int row=e.getFirstRow();
+                    int col=e.getColumn();
+                    int qte=(int)tble_command.getValueAt(row, col);
+                    double calculateqte=(qte*(double)tble_command.getValueAt(row, 4));
+                    totPaie=(totPaie-(double)tble_command.getValueAt(row, 4))+calculateqte;
+                    tble_command.setValueAt(calculateqte, row, 4);
+                    tx_tot_paie.setText(Double.toString(totPaie));
+                } catch (Exception ex) {
+                    
+                    
+                }
+               
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+               
+           });
+           tble_plat.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                try {
+                    int row=e.getFirstRow();
+                    int col=e.getColumn();
+                    food f=new food
+                    (
+                        Integer.parseInt(modelPlat.getValueAt(row, 0).toString()),
+                        modelPlat.getValueAt(row, 1).toString(),
+                        Double.parseDouble(modelPlat.getValueAt(row, 2).toString()),
+                        "",
+                        0
+                    );
+                    boolean checkedProduct=(boolean)modelPlat.getValueAt(row, col);
+                    if (checkedProduct) {
+                    
+                        modelCmd=(DefaultTableModel)tble_command.getModel();
+                        modelCmd.insertRow(tble_command.getRowCount(), new Object[]{f.getIdFood(),f.getNameFood(),f.getPriceFood(),1,f.getPriceFood()});
+                       // System.out.println("Size collection Add:"+listCommand.size());
+                        totPaie+=f.getPriceFood();
+                        tx_tot_paie.setText(Double.toString(totPaie));
+                    }else{
+                        for (int i = 0; i < tble_command.getRowCount(); i++) {
+                        int idProduct=(int)tble_command.getValueAt(i, 0);
+                        if (f.getIdFood()==idProduct) {
+                            totPaie=totPaie-(double)tble_command.getValueAt(i, 4);
+                            tx_tot_paie.setText(Double.toString(totPaie));
+                            modelCmd.removeRow(i);
+                        }
+                    }
+                    }
+                } catch (Exception ex) {
+                }
+               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+            jListRules=new JComboBox(new Object[]{"administrator","user"});
+           TableColumn tbluserColumn=tble_users.getColumnModel().getColumn(3);
+           tbluserColumn.setCellEditor(new DefaultCellEditor(jListRules));
+           
+           tble_users.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int row=e.getFirstRow();
+                int cols=e.getColumn();
+                if (cols==3) {
+                    String strPriority=tble_users.getValueAt(row, cols).toString();
+                    //JOptionPane.showMessageDialog(null, strPriority);
+                    if (!strPriority.equals("administrator") && !strPriority.equals("user") ) {
+                        JOptionPane.showMessageDialog(null, "Choisissez: administrator ou user","Error Rule",JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        try {
+                            int id=Integer.parseInt(tble_users.getValueAt(row, 0).toString());
+                            user uid=new user(id,
+                                    tble_users.getValueAt(row, 1).toString(),
+                                    tble_users.getValueAt(row, 2).toString(),
+                                    "",
+                                    tble_users.getValueAt(row, 3).toString()
+                            );
+                            int i=new userController().updateUser(uid);
+                          //  JOptionPane.showMessageDialog(null, "response:"+i);
+                                    
+                            if (i>-1) {
+                                JOptionPane.showMessageDialog(null, "Modification effectuée","Update user",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                }
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+           tble_accomp.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                try {
+                    int row=e.getFirstRow();
+                    int col=e.getColumn();
+                    food f=new food
+                    (
+                        Integer.parseInt(modelAccompa.getValueAt(row, 0).toString()),
+                        modelAccompa.getValueAt(row, 1).toString(),
+                        Double.parseDouble(modelAccompa.getValueAt(row, 2).toString()),
+                        "",
+                        0
+                    );
+                    boolean checkedProduct=(boolean)modelAccompa.getValueAt(row, col);
+                    if (checkedProduct) {
+                    
+                        modelCmd=(DefaultTableModel)tble_command.getModel();
+                        modelCmd.insertRow(tble_command.getRowCount(), new Object[]{f.getIdFood(),f.getNameFood(),f.getPriceFood(),1,f.getPriceFood()});
+                       // System.out.println("Size collection Add:"+listCommand.size());
+                        totPaie+=f.getPriceFood();
+                        tx_tot_paie.setText(Double.toString(totPaie));
+                    }else{
+                        for (int i = 0; i < tble_command.getRowCount(); i++) {
+                        int idProduct=(int)tble_command.getValueAt(i, 0);
+                        if (f.getIdFood()==idProduct) {
+                            totPaie=totPaie-(double)tble_command.getValueAt(i, 4);
+                            tx_tot_paie.setText(Double.toString(totPaie));
+                            modelCmd.removeRow(i);
+                        }
+                    }
+                    }
+                } catch (Exception ex) {
+                    
+                }
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+           tble_product.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+               // System.out.println("Cols:"+e.getColumn()+", Row:"+e.getFirstRow());
+              // JOptionPane.showMessageDialog(null, model.getValueAt(e.getFirstRow(), e.getColumn()).toString());
+                try {
+                    int row=e.getFirstRow();
+                int col=e.getColumn();
+               food f=new food(
+                       Integer.parseInt(model.getValueAt(row, 0).toString()),
+                       model.getValueAt(row, 1).toString(), 
+                       Double.parseDouble(model.getValueAt(row, 2).toString()),
+                       "",
+                       0
+               );
+               boolean checkedProduct=(boolean) model.getValueAt(row, col);
+                if (checkedProduct) {
+                    listCommand.add(f);
+                    modelCmd=(DefaultTableModel)tble_command.getModel();
+                    modelCmd.insertRow(tble_command.getRowCount(), new Object[]{f.getIdFood(),f.getNameFood(),f.getPriceFood(),1,f.getPriceFood()});
+                    System.out.println("Size collection Add:"+listCommand.size());
+                    totPaie+=f.getPriceFood();
+                    tx_tot_paie.setText(Double.toString(totPaie));
+                } else {
+                    for (int i = 0; i < tble_command.getRowCount(); i++) {
+                        int idProduct=(int)tble_command.getValueAt(i, 0);
+                        if (f.getIdFood()==idProduct) {
+                            totPaie=totPaie-(double)tble_command.getValueAt(i, 4);
+                            tx_tot_paie.setText(Double.toString(totPaie));
+                            modelCmd.removeRow(i);
+                        }
+                    }
+                    
+                }
+                } catch (Exception ex) {
+                    System.out.println("Exception:"+ex.getMessage());
+                }
+                
+//               
+               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+//          tble_product.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                       
+//                int index=tble_product.getSelectedRow();
+//                int i=0;
+//                boolean status=(boolean)tble_product.getValueAt(index, 3);
+//                //JOptionPane.showMessageDialog(rootPane, "Iterator:"+status);
+//                System.out.println("Param event:"+e.getValueIsAdjusting());
+////                if (!status){
+////                                   //tble_product.setValueAt(true, index, 3);
+////                                   // System.out.println("Status true: "+status);
+////                                   //
+////                                   status=true;
+////                                   ++i;
+////                                   //JOptionPane.showMessageDialog(rootPane, "Iterator:"+i);
+////
+////                }else{
+////                                                      // JOptionPane.showMessageDialog(rootPane, "Status:"+status);
+////                       //tble_product.setValueAt(false, index, 3);
+////                                   // System.out.println("Status false: "+status);
+////                                    ++i;
+////                                    //status=false;            
+////
+////
+////                }
+//
+//
+//            }
+//        });
+            tx_filter_accomp.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterProduct(FoodEnum.AC);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterProduct(FoodEnum.AC);
+               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+            tx_filter_plat.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterProduct(FoodEnum.PL);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterProduct(FoodEnum.PL);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+           
+            tx_filter.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               
+                    filterProduct(FoodEnum.BL);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterProduct(FoodEnum.BL);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+         
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
     public Dashboard(JButton jButton1, JButton jButton2, JButton jButton3, JButton jButton4, JButton jButton5, JButton jButton6, JButton jButton7, JButton jButton8, JLabel jLabel1, JPanel jPanel1, JPanel jPanel2, JPanel jPanel3, JPanel jPanel4, JPanel jPanel5, JPanel jPanel6, JPanel jPanel7, JPanel jPanel8, JPanel jPanel9, JScrollPane jScrollPane2, JTabbedPane jTabbedPane1, JTabbedPane jTabbedPane2, JLabel lb_taux, JLabel lbl_timer, JLabel lbl_user, JTable tble_product) throws HeadlessException {
       //  this.btn_save_billing = jButton1;
